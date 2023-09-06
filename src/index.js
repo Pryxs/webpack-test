@@ -1,5 +1,8 @@
 import "./style.scss";
-import { toto } from './module.js'
+import { Input } from './components/input'
 
-console.log('index')
-toto();
+const app = document.querySelector('#app');
+
+app.appendChild(Input({}));
+
+console.log(app)
