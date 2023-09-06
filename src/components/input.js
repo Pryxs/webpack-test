@@ -1,7 +1,21 @@
 import { mountElement, unmountElement } from '../core/core.js'
 
-export const Input = ({placeholder, type, rule, min, max}) => {
-    const inputContainer = mountElement({ tag: 'div'});
+export const Input = ({name, placeholder, type, rule, min, max}) => {
+    const inputContainer = mountElement({
+        tag: 'div',
+        attr: [{
+            key: 'class',
+            value: 'input-container',
+        }]
+    });
+    const label = mountElement({
+        tag: 'label',
+        text: name.charAt(0).toUpperCase() + name.slice(1),
+        attr: [{
+            key: 'for',
+            value: name,
+        }]
+    });
     const input = mountElement({
         tag: 'input',
         attr: [{
@@ -10,35 +24,39 @@ export const Input = ({placeholder, type, rule, min, max}) => {
         },{
             key: 'type',
             value: type ?? 'text',
+        }, {
+            key: 'name',
+            value: name,
         }
     ]
     })
 
-    inputContainer.appendChild(input)
+    inputContainer.append(label, input)
 
     input.addEventListener('input', (event) => {
         const errors = [];
-
         const { value } = event.target;
 
-        if(rule && !rule.test(value)) errors.push('matching rule failed')
-        if(max && value.length &&  value.length > max) errors.push('Max character allowed : ' + max)
-        if(min && value.length && value.length < min) errors.push('Min character allowed : ' + min)
+        if(rule && value && !rule.test(value)) errors.push('matching rule failed')
+        if(max && value &&  value.length > max) errors.push('Max character allowed : ' + max)
+        if(min && value && value.length < min) errors.push('Min character allowed : ' + min)
 
         unmountElement(inputContainer.querySelectorAll('.error'));
 
-        if(errors.length) {
-            const error = mountElement({
+        const errorsElement = errors.map(error => {
+            const element = mountElement({
                 tag: 'span',
-                text: errors[0],
+                text: error,
                 attr: [{
                     key: 'class',
                     value: 'error',
                 }]
             })
-            console.log(error)
-            inputContainer.appendChild(error)
-        }
+
+            return element
+        })
+        
+        inputContainer.append(...errorsElement)
     })
 
     return inputContainer;

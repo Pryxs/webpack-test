@@ -1,8 +1,8 @@
 import "./style.scss";
-import { Input } from './components/input'
+import { Form } from './components/form'
 
 const app = document.querySelector('#app');
 
-app.appendChild(Input({min: 3, rule : /^[^\s@]+@[^\s@]+\.[^\s@]+$/}));
+app.appendChild(Form());
 
 console.log(app)
