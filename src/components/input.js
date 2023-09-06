@@ -1,6 +1,6 @@
 import { mountElement, unmountElement } from '../core/core.js'
 
-export const Input = ({name, placeholder, type, rule, min, max}) => {
+export const Input = ({name, placeholder, type, rule, min, max, autocomplete}) => {
     const inputContainer = mountElement({
         tag: 'div',
         attr: [{
@@ -27,7 +27,10 @@ export const Input = ({name, placeholder, type, rule, min, max}) => {
         }, {
             key: 'name',
             value: name,
-        }
+        }, {
+            key: 'autocomplete',
+            value: autocomplete,
+        },
     ]
     })
 

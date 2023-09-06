@@ -18,16 +18,30 @@ export const Form = () => {
         Input({name: 'nickname', min: 5, max: 19, placeholder: 'Alibobo'}),
         Input({name: 'email', min: 3, placeholder: 'alibobo@gmail.com', rule : /^[^\s@]+@[^\s@]+\.[^\s@]+$/}),
         Input({name: 'password', min: 8, max: 30, type: 'password'}),
-        Input({name: 'confirm', min: 8, max: 30, type: 'password'}),
+        Input({name: 'confirm', min: 8, max: 30, type: 'password', autocomplete: true}),
         button
     );
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const inputs = form.querySelectorAll('input[type=text], input[type=password]');
-        const errors = form.querySelectorAll('.error');
-        
-        if(![...inputs].filter(e => !e.value).length && !errors.length) form.submit();
+        const errors = form.querySelectorAll('.error:not(.-global)');
+
+        if([...inputs].filter(e => !e.value).length) {
+            const errorElement = mountElement({
+                tag: 'span',
+                text: '/ ! \\ Empty fields',
+                attr: [{
+                    key: 'class',
+                    value: 'error -global',
+                }]
+            })
+    
+            form.append(errorElement)
+            return;
+        }
+
+        if(!errors.length) form.submit();
     });
 
     return form;
