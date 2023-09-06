@@ -72,5 +72,15 @@ label {
         top: -40px;
         width: -webkit-fill-available;
         text-align: center;
+        animation-duration: 0.75s;
+        animation-delay: 3s;
+        animation-name: animate-fade;
+        animation-timing-function: cubic-bezier(.26, .53, .74, 1.48);
+        animation-fill-mode: forwards;
     }
 }
+
+@keyframes animate-fade {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
