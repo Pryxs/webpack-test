@@ -12,3 +12,9 @@ export const mountElement = ({tag, text, attr}) => {
 
     return element;
 }
+
+export const unmountElement = (elements) => {
+    for (const elem of elements) {
+        elem.remove();
+    }
+}
