@@ -1,0 +1,54 @@
+main {
+    // background: $dark;
+    // background: linear-gradient(180deg, $secondary 6%, $light 21%);
+
+    article {
+        margin: auto;
+        padding-top: 10rem;
+        max-width: 1224px;
+    }
+
+    article:first-child{
+        display: flex;
+        align-items: start;
+        gap: 44px;
+
+        &>div{
+            flex: 1;
+        }
+
+        &>iframe{
+            flex: 1;
+        }
+    }
+
+    article:nth-child(2) {
+        &>div{
+            display: flex;
+            margin: 10rem 0;
+
+            &>div{
+                flex: 1;
+                &>img{
+                    display: block;
+                    margin: auto;
+                    margin-bottom: 1em;
+                }
+
+                summary{
+                    font-size: 18px;
+                    font-family: Math;
+                    width: fit-content;
+                    margin: auto;
+                    cursor: pointer;
+                }
+
+                p{
+                    text-align: center;
+                    padding: 0 2em;
+                }
+            }
+        }
+    }
+
+}

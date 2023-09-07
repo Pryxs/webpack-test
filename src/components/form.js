@@ -2,7 +2,19 @@ import { mountElement, unmountElement } from '../core/core.js'
 import { Input } from './input'
 
 export const Form = () => {
+    const container = mountElement({tag: 'div', attr: [{
+        key: 'class', 
+        value: 'form-wrapper'
+    } , {
+        key: 'id', 
+        value: 'form'
+    }]});
     const form = mountElement({tag: 'form',});
+
+    const title = mountElement({
+        tag: 'h2',
+        text: 'S\'inscrire maintenant !'
+    });
 
     const button = mountElement({
         tag: 'input',
@@ -13,13 +25,12 @@ export const Form = () => {
     });
 
     form.append(
+        title,
         Input({name: 'surname', min: 2, max: 25, placeholder: 'Alice'}),
         Input({name: 'name', min: 2, max: 25, placeholder: 'Bob'}),
         Input({name: 'nickname', min: 5, max: 19, placeholder: 'Alibobo'}),
         Input({name: 'email', min: 3, placeholder: 'alibobo@gmail.com', rule : /^[^\s@]+@[^\s@]+\.[^\s@]+$/}),
-        Input({name: 'password', min: 8, max: 30, type: 'password'}),
-        Input({name: 'confirm', min: 8, max: 30, type: 'password', autocomplete: true}),
-        button
+        button,
     );
 
     form.addEventListener("submit", (e) => {
@@ -44,5 +55,7 @@ export const Form = () => {
         if(!errors.length) form.submit();
     });
 
-    return form;
+    container.appendChild(form)
+
+    return container;
 }

@@ -1,0 +1,32 @@
+footer{
+    background-color: $dark;
+    color: $light;
+    padding:4rem;
+
+    &>div:first-child {
+        max-width: 1224px;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        margin-bottom: 1rem;
+
+        span{
+            display: block;
+        }
+
+        address a {
+            color: $main;
+        }
+    }
+
+    &>div:nth-child(2) {
+        margin: auto;
+        max-width: 1224px;
+        border-top: 1px solid $light;
+        p{ 
+            margin: 0;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    }
+}
